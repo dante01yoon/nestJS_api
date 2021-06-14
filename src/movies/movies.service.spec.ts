@@ -1,5 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import request from 'supertest';
 import { MoviesService } from './movies.service';
 
 describe('MoviesService', () => {
