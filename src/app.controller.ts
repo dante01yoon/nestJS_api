@@ -1,6 +1,6 @@
 import { Controller, Get, Header, HttpCode, Post, Redirect, Query, Param } from '@nestjs/common';
 
-@Controller()
+@Controller("api")
 export class AppController {
   @Get()
   home() {
