@@ -3,16 +3,17 @@ import Board from "./board.js";
 
 const ce = React.createElement
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.socket = io();
   }
 
   render() {
     return (
       ce(Board, {
         inputtag: ce(Input),
+        socket: this.socket,
       })
     )
   }

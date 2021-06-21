@@ -12,15 +12,32 @@ class Board extends React.Component {
     super(props);
     this.state = {
       chats: [],
+
     }
   }
 
+  componentDidMount() {
+    const { socket } = this.props;
+
+    socket.on("msgFromServer", () => {
+      this.setState({
+        chats: [
+          ...this.state.chats,
+          chat,
+        ]
+      })
+    });
+
+  }
+
+  componentWillUnMount() {
+    this.props.socket.leave();
+  }
+
   updateChats = (chat) => {
-    this.setState({
-      chats: [
-        ...this.state.chats,
-        chat
-      ]
+    const { socket } = this.props;
+    socket.emit("fromClient", {
+      message: chat,
     })
   }
 
