@@ -19,9 +19,12 @@ class Input extends React.Component {
       className: "input_value",
       placeholder: "메세지를 입력하세요...",
     });
+
     const wrapper = ce("div", {
-      className: "input_wrapper",
+      className: "input_box",
     }, input)
+
+
     return (
       wrapper
     )
