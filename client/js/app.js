@@ -3,6 +3,7 @@ import Board from "./board.js";
 
 const ce = React.createElement
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,12 +11,10 @@ class App extends React.Component {
 
   render() {
     return (
-      React.createElement("div",
-        {},
-        ce(Board, {
-          inputtag: ce(Input),
-        }))
-    );
+      ce(Board, {
+        inputtag: ce(Input),
+      })
+    )
   }
 }
 
