@@ -19,11 +19,12 @@ class Board extends React.Component {
   componentDidMount() {
     const { socket } = this.props;
 
-    socket.on("msgFromServer", () => {
+    socket.on("fromServer", ({ message }) => {
+      console.log(message);
       this.setState({
         chats: [
           ...this.state.chats,
-          chat,
+          message,
         ]
       })
     });
@@ -58,9 +59,16 @@ class Board extends React.Component {
   render() {
     const { inputtag } = this.props;
 
+    const chatElement = (chat, idx) => ce("div", {
+      className: "chat_element",
+      key: `chatElementKey::${idx}`
+    }, chat)
+
     const chatContainer = ce("article", {
       className: "chat_container",
-    })
+    }, ce(React.Fragment, {}, this.state.chats.map(
+      (chat, idx) => chatElement(chat, idx))
+    ));
 
     const inputContainer = ce("article", {
       className: "input_container",

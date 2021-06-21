@@ -1,10 +1,16 @@
 import { Inject } from '@nestjs/common';
-import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
-
+import { SubscribeMessage, WebSocketGateway, MessageBody, ConnectedSocket, WebSocketServer } from '@nestjs/websockets';
+import { Socket } from "socket.io";
 @WebSocketGateway()
 export class AppGateway {
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    return 'Hello world!';
+  @WebSocketServer() server;
+  @SubscribeMessage('fromClient')
+  handleMessage(
+    @MessageBody() message,
+    @ConnectedSocket() client: Socket
+  ) {
+    console.log(client);
+    console.log(message);
+    this.server.emit("fromServer", message);
   }
 }
